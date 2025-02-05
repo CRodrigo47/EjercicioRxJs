@@ -1,5 +1,104 @@
 <div class="mt-5">
-    <p class="mt-5">
-        producto edit
-    </p>
+  @defer (when load) {
+  <div class="row mt-5">
+    <div class="col-md-4 offset-md-2">
+      <h3></h3>
+      <form [formGroup]="formProduct">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            formControlName="title"
+            placeholder="Title"
+          />
+          <label for="Title">Title</label>
+          @if (title.invalid && (title.dirty || title.touched)) {
+          <div class="alert alert-danger">
+            @if (title.errors["required"]) { Title es obligatorio }
+          </div>
+          }
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="price"
+            formControlName="price"
+            placeholder="Price"
+          />
+          <label for="Price">Price</label>
+          @if (price.invalid && (price.dirty || price.touched)) {
+          <div class="alert alert-danger">
+            @if (price.errors["required"]) { Price es obligatorio }
+          </div>
+          }
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            formControlName="description"
+            placeholder="description"
+          />
+          <label for="description">description</label>
+          @if (description.invalid && (description.dirty ||
+          description.touched)) {
+          <div class="alert alert-danger">
+            @if (description.errors["required"]) { description es obligatorio }
+          </div>
+          }
+        </div>
+      </form>
+      <div class="col-md-4 col-lg-3">
+        <div class="card shadow-sm">
+          <img
+            [src]="image.value"
+            alt="{{ title.value }}"
+            class="card-img-top"
+          />
+          <div class="card-body">
+            <p class="card-text">{{ title.value ? title.value : "Title" }}</p>
+            <p class="badge rounded-pill -primary">
+              {{ category.value ? category.value : "Category" }}
+            </p>
+            <p class="card-text">
+              {{ description.value ? description.value : "Description" }}
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  <fa-icon [icon]="faCartShopping"></fa-icon>
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  <fa-icon [icon]="faTrashCan"></fa-icon>
+                </button>
+              </div>
+              <small class="text-body-secondary">{{
+                price.value | currency : "EUR"
+              }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      @if (toastShow) {
+      <ngb-toast
+        class="toast-container position-fixed top-0 end-0 p-3 {{ toast.color }}"
+        style="z-index: 1200"
+        >{{ toast.body }}</ngb-toast
+      >
+      }
+    </div>
+  </div>
+  } @placeholder {
+  <div class="mt-5 d-flex justify-content-center">
+    <div class="spinner-border text-info" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  }
 </div>

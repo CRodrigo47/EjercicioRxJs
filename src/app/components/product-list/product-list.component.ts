@@ -4,6 +4,7 @@ import { Product } from '../../common/interfaces';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons/faCartShopping';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons/faTrashCan';
 import { CurrencyPipe } from '@angular/common';
 import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
 import { RouterLink } from '@angular/router';
@@ -53,4 +54,16 @@ export class ProductListComponent {
 
   protected readonly faCartShopping = faCartShopping;
   protected readonly faEdit = faEdit;
+  protected readonly faTrashCan = faTrashCan;
+
+  deleteProduct(id: number) {
+    this.productService.deleteProduct(id).subscribe({
+      next: (value) => {
+        this.showToast(value.title + ' deleted!', 'bg-success');
+      },
+      error: (err) => {
+        this.showToast(err.message, 'bg-danger');
+      },
+    });
+  }
 }

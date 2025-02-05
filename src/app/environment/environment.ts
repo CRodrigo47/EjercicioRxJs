@@ -1,4 +1,4 @@
 export const environment = {
-    production: false,
-    urlBase: 'https://fakestoreapi.com/products'
-}
+  production: false,
+  urlBase: 'https://fakestoreapi.com/products/',
+};
